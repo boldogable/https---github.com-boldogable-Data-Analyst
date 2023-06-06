@@ -1,19 +1,38 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-# Adatok betöltése
-data = pd.read_csv('adatok.csv')
+def load_data(file_path):
+    # Load the data
+    data = pd.read_csv(file_path)
+    return data
 
-# Független változók és célváltozó kiválasztása
-X = data[['fuggetlen_valtozo1', 'fuggetlen_valtozo2']]
-y = data['celvaltozo']
+def fit_linear_regression_model(X, y):
+    # Fit the linear regression model
+    model = LinearRegression()
+    model.fit(X, y)
+    return model
 
-# Modell illesztése
-model = LinearRegression()
-model.fit(X, y)
+def predict(model, X):
+    # Make predictions using the model
+    predictions = model.predict(X)
+    return predictions
 
-# Predikció
-pred = model.predict(X)
+def main():
+    # Load the data
+    data = load_data('data.csv')
 
-# Predikciók kiíratása
-print(pred)
+    # Select independent variables and target variable
+    X = data[['independent_variable1', 'independent_variable2']]
+    y = data['target_variable']
+
+    # Fit the model
+    model = fit_linear_regression_model(X, y)
+
+    # Predict
+    predictions = predict(model, X)
+
+    # Print predictions
+    print(predictions)
+
+if __name__ == '__main__':
+    main()
